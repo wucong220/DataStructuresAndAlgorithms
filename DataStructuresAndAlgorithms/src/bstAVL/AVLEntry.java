@@ -7,6 +7,7 @@ public class AVLEntry<K,V> implements Map.Entry<K,V>{
 	public V value;
 	public AVLEntry<K, V> left;
 	public AVLEntry<K, V> right;
+	public int height=1;
 	
 	@Override
 	public K getKey() {
@@ -32,12 +33,9 @@ public class AVLEntry<K,V> implements Map.Entry<K,V>{
 		this.value = value;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "AVLEntry [key=" + key + ", value=" + value + "]";
+		return "AVLEntry [key=" + key + ", value=" + value + ", height=" + height + "]";
 	}
 		
 }

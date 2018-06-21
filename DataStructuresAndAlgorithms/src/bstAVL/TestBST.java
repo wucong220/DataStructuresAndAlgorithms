@@ -85,4 +85,59 @@ public class TestBST {
 			Assert.assertTrue(map1.containsValue(value)==map2.containsValue(value));
 		}
 	}
+	@Test
+	public void TestRemoveCase1(){
+		AVLMap<Integer,String> map = new AVLMap<>();
+		int[] array = {5,2,6,1,4,7,3};
+		for(int key:array){
+			map.put(key, key+"");
+		}
+		System.out.println(map.remove(1));
+		map.levelOrder();
+		
+		Iterator<AVLEntry<Integer, String>> it = map.iterator();
+		while(it.hasNext())System.out.print(it.next().key+" ");
+	}
+	@Test
+	public void TestRemoveCase2(){
+		AVLMap<Integer,String> map = new AVLMap<>();
+		int[] array = {5,2,6,1,4,7,3};
+		for(int key:array){
+			map.put(key, key+"");
+		}
+		System.out.println(map.remove(4));
+		map.levelOrder();
+		
+		Iterator<AVLEntry<Integer, String>> it = map.iterator();
+		while(it.hasNext())System.out.print(it.next().key+" ");
+	}
+	@Test
+	public void TestRemoveCase3(){
+		AVLMap<Integer,String> map = new AVLMap<>();
+		int[] array = {6,2,7,1,4,8,3,5};
+		for(int key:array){
+			map.put(key, key+"");
+		}
+		System.out.println(map.remove(2));
+		map.levelOrder();
+		
+		Iterator<AVLEntry<Integer, String>> it = map.iterator();
+		while(it.hasNext())System.out.print(it.next().key+" ");
+	}
+	@Test
+	public void TestRemoveWithJDK(){
+		AVLMap<Integer,String> map1 = new AVLMap<>();
+		TreeMap<Integer,String> map2 = new TreeMap<>();
+		for(int i=0;i<MAX2;i++){
+			Integer key = random.nextInt(MAX2);
+			String value = random.nextInt(MAX2)+"";
+			map1.put(key, value);
+			map2.put(key, value);
+		}
+		System.out.println(map1.size());
+		for(int i=0;i<MAX2;i++){
+			Integer key = random.nextInt(MAX2);
+			Assert.assertEquals(map1.remove(key),map2.remove(key));
+		}
+	}
 }
