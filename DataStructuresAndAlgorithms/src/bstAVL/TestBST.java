@@ -140,4 +140,31 @@ public class TestBST {
 			Assert.assertEquals(map1.remove(key),map2.remove(key));
 		}
 	}
+	@Test
+	public void testAVLDelete(){
+		AVLMap<Integer,String> map1 = new AVLMap<>();
+		TreeMap<Integer,String> map2 = new TreeMap<>();
+		for(int i=0;i<MAX2;i++){
+			Integer key = random.nextInt(MAX2);
+			String value = random.nextInt(MAX2)+"";
+			map1.put(key, value);
+			map2.put(key, value);
+		}
+		map1.checkBalance();
+		for(int i=0;i<MAX2>>1;i++){
+			int key = random.nextInt(MAX2);
+			map1.remove(key);
+			map2.remove(key);
+		}
+		map1.checkBalance();
+		Assert.assertEquals(map1.size(),map2.size());
+		
+		Iterator<AVLEntry<Integer, String>> it1 = map1.iterator();
+		Iterator<Entry<Integer, String>> it2 = map2.entrySet().iterator();
+		while(it1.hasNext()&&it2.hasNext()){
+			Assert.assertTrue(it1.next().getKey().equals(it2.next().getKey()));
+		}
+		Assert.assertTrue(!it1.hasNext()&&!it2.hasNext());
+		
+	}
 }

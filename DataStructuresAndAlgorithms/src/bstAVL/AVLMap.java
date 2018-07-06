@@ -161,6 +161,7 @@ public class AVLMap<K, V> implements Iterable<AVLEntry<K, V>> {
 				AVLEntry<K, V> newRight = deleteEntry(p.right, key);
 				p.right = newRight;
 			}
+			p=fixAfterDeletion(p);
 			return p;
 		}
 	}
@@ -267,6 +268,30 @@ public class AVLMap<K, V> implements Iterable<AVLEntry<K, V>> {
 		}
 	}
 
+	private AVLEntry<K, V> fixAfterDeletion(AVLEntry<K, V> p){
+		if(p==null){
+			return null;
+		}
+		else{
+			p.height = Math.max(getHeight(p.left),getHeight(p.right))+1;
+			int d = getHeight(p.left)-getHeight(p.right);
+			if(d==2){
+				if(getHeight(p.left.left)-getHeight(p.left.right)>=0){
+					p=rotateRight(p);
+				}else{
+					p=firstLeftThenRight(p);
+				}
+			}else if(d==-2){
+				if(getHeight(p.right.left)-getHeight(p.right.right)<=0){
+					p=rotateLeft(p);
+				}else{
+					p=firstRightThenLeft(p);
+				}
+			}
+			return p;
+		}
+	}
+	
 	public void levelOrder() {
 		Queue<AVLEntry<K, V>> queue = new LinkedList<>();
 		queue.offer(root);
