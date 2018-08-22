@@ -35,7 +35,7 @@ public class HeapSort<T> {
 	}
 
 	private void shiftDown(T[] array, int p, int heapSize) {
-		int half =( heapSize >>> 1) - 1; // 最后一个非叶子节点下标
+		int half =( heapSize >>> 1) - 1; // 最后一个非叶子节点下标（2n+2）/2或(2n+3)/2 ==2n+1,所以 heapsize/2-1;
 		int k = p;
 		T value = array[k];
 		while (k <= half) {
@@ -63,8 +63,10 @@ public class HeapSort<T> {
 		}
 	}
 	public void heapSort(T[] array){
-		for(int i=array.length;i>=1;i--){
-			heapifyPostOrder(array, 0, i);
+		heapifyPostOrder(array, 0, array.length);
+		swap(array, array.length-1, 0);
+		for(int i=array.length-1;i>=1;i--){
+			shiftDown(array, 0, i);
 			swap(array, i-1, 0);
 		}
 	}
@@ -74,7 +76,7 @@ public class HeapSort<T> {
 	private final static int MA1 = 1000;
 	public static void main(String[] args) {
 		Integer[] array = new Integer[MA1];
-		Random random = new Random(MA1);
+		Random random = new Random(123456);
 		for(int i=0;i<MA1;i++){
 			array[i] = random.nextInt(MA1);
 		}
