@@ -128,3 +128,26 @@ public class Djkstra {
 	}
 
 }
+
+//算法思想 贪心算法，每次把离原点最近的点加入，确定最小距离点集，并更新其邻接点的最短距离。 缺点无法处理负权边
+
+/*伪代码 O(|E|+|V|log|V|)
+procedure dijkstra(G,l,s)
+Input:  graph G=(V,E), directed or undirected; 
+		with positive edge lengths {l_e:e∈E}; vertex s∈V
+Output: For all vertices u reachable from s, dist(u) is set to distance from s to u.
+
+for all u∈V
+	dist(u)=∞ //点u离原点的距离
+	prev(u)=null //点u的前驱节点
+dist(u)=0;
+
+H=makequeue(V) (priority queue, using dist-values as keys) 优先队列
+while(H is not empty)
+	v = deletemin(H) //每次从优先队列中取出开销最小的点
+	for each {v,z}∈E:  //遍历V所有的邻接点，更新他们的开销
+		if dist(z) > dist(z)+l(v,z):
+			dist(z) = dist(z)+l(v,z)
+			prev(z) = v
+			decreasekey(H,z)
+*/
